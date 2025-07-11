@@ -18,11 +18,11 @@ class ActorManager:
         self._connection.commit()
 
     def all(self) -> list[Actor]:
-        format_coursor = self._connection.execute(
+        format_cursor = self._connection.execute(
             f"SELECT * FROM {self.table_name}"
         )
         return [
-            Actor(*row) for row in format_coursor
+            Actor(*row) for row in format_cursor
         ]
 
     def update(
@@ -33,7 +33,7 @@ class ActorManager:
     ) -> None:
         self._connection.execute(
             f"UPDATE {self.table_name} "
-            "SET first_name = ?, last_name = ?"
+            "SET first_name = ?, last_name = ? "
             "WHERE id = ?",
             (new_first_name, new_last_name, pk)
         )
